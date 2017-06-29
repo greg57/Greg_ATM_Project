@@ -34,18 +34,18 @@ public class CardReaderPanel extends JPanel
 	private JButton btn7;
 	private JButton btn8;
 	private JButton btn9;
-	private JPanel panel_1;
 	private JButton btn0;
-	private JPanel panel_2;
 	private JPanel pinPanel;
 	private JPasswordField pinJTF;
+	private JButton btnEnter;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
 	 */
 	public CardReaderPanel()
 	{
-		setBackground(new Color(0, 255, 255));
+		setBackground(new Color(255, 255, 255));
 
 		lblVzapBank = new JLabel("VZAP Bank");
 		lblVzapBank.setBorder(new LineBorder(new Color(0, 0, 255), 2, true));
@@ -75,18 +75,18 @@ public class CardReaderPanel extends JPanel
 								.addGap(54).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 488,
 										GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(40, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(590, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap(560, Short.MAX_VALUE)
 						.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
-						.addGap(97)));
+						.addGap(127)));
 		groupLayout
 				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
 						.createSequentialGroup()
 						.addGap(43).addComponent(lblVzapBank).addGroup(groupLayout
 								.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(125)
+								.addGroup(groupLayout.createSequentialGroup().addGap(129)
 										.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE,
 												83, GroupLayout.PREFERRED_SIZE)
-										.addGap(65).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 298,
+										.addGap(61).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 298,
 												GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup().addGap(259).addComponent(keyPanel,
 										GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)))
@@ -150,18 +150,22 @@ public class CardReaderPanel extends JPanel
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 25));
 		keyPanel.add(btn9);
 
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.CYAN);
-		keyPanel.add(panel_1);
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBorder(new LineBorder(new Color(255, 0, 0)));
+		btnCancel.setForeground(new Color(255, 0, 0));
+		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		keyPanel.add(btnCancel);
 
 		btn0 = new JButton("0");
 		btn0.setBorder(new LineBorder(Color.RED));
 		btn0.setFont(new Font("Tahoma", Font.BOLD, 25));
 		keyPanel.add(btn0);
 
-		panel_2 = new JPanel();
-		panel_2.setBackground(Color.CYAN);
-		keyPanel.add(panel_2);
+		btnEnter = new JButton("Enter");
+		btnEnter.setForeground(new Color(0, 0, 0));
+		btnEnter.setBackground(new Color(0, 255, 127));
+		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 25));
+		keyPanel.add(btnEnter);
 
 		lblCardreadericon = new JLabel("");
 		lblCardreadericon.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null),
