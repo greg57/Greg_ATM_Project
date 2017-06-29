@@ -2,6 +2,7 @@ package vzap.greg.guis.atmgui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ public class ATM_MainGUI extends JFrame
 {
 
 	private JPanel basePanel;
+	private CardReaderPanel cardReaderPanel;
 
 	/**
 	 * Launch the application.
@@ -40,9 +42,11 @@ public class ATM_MainGUI extends JFrame
 	public ATM_MainGUI()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1045, 783);
+		setBounds(100, 100, 1134, 894);
 		basePanel = new JPanel(new GridLayout(1, 1));
 		basePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		cardReaderPanel = new CardReaderPanel();
+		basePanel.add(cardReaderPanel);
 		setContentPane(basePanel);
 	}
 
