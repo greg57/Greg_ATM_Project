@@ -2,6 +2,7 @@ package vzap.greg.banking;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import vzap.greg.exception.BankCardException;
 
@@ -11,22 +12,22 @@ public class BankCard implements Serializable
 
 	private String cardNumber = null;
 	private String pinNumber = null;
-	
-	private ArrayList<Account> accounts = null;
+	private Vector<Account> accounts = null;
 
 	public BankCard(String cardNumber, String pinNumber) 
 	{
 		this.cardNumber = cardNumber;
 		this.pinNumber = pinNumber;
+		this.accounts = null;
 	}
 	
-	public BankCard(String cardNumber, String pinNumber, ArrayList<Account> accounts)throws BankCardException, IllegalArgumentException
+	public BankCard(String cardNumber, String pinNumber, Vector<Account> accounts)throws BankCardException, IllegalArgumentException
 	{
 		this(cardNumber, pinNumber);
 		this.accounts = accounts;
 	}
 	
-	public ArrayList<Account> getAccounts()
+	public Vector<Account> getAccounts()
 	{
 		return accounts;
 	}
