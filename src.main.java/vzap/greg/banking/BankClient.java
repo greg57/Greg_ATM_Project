@@ -24,14 +24,7 @@ public class BankClient
 		this(idNumber, name, surname, null, null, "y");
 	}
 	
-	public String getIdNumber()
-	{
-		return this.clientID;
-	}
-	public void setIdNumber(String idNumber)
-	{
-		this.clientID = idNumber;
-	}
+	
 	public String getName()
 	{
 		return this.name;
@@ -48,18 +41,43 @@ public class BankClient
 	{
 		this.surname = surname;
 	}
-	public BankCard getBankCard()
+	public int getClientID()
 	{
-		return this.bankCard;
+		return this.clientID;
 	}
-	public void setBankCard(BankCard bankCard)
+	public void setClientID(int clientID)
 	{
-		this.bankCard = bankCard;
+		this.clientID = clientID;
+	}
+	public String getEmail()
+	{
+		return this.email;
+	}
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+	public String getCellNumber()
+	{
+		return this.cellNumber;
+	}
+	public void setCellNumber(String cellNumber)
+	{
+		this.cellNumber = cellNumber;
+	}
+	public String getIsActive()
+	{
+		return this.isActive;
+	}
+	public void setIsActive(String isActive)
+	{
+		this.isActive = isActive;
 	}
 	@Override
 	public String toString()
 	{
-		return "BankClient [name=" + this.name + ", surname=" + this.surname + ", bankCard=" + this.bankCard
-				+ ", idNumber=" + this.clientID + "]";
+		return "BankClient [name=" + this.name + ", surname=" + this.surname + ", clientID=" + this.clientID
+				+ ", email=" + this.email + ", cellNumber=" + this.cellNumber + ", isActive=" + this.isActive + "]";
 	}
+	
 }
