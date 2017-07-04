@@ -1,7 +1,11 @@
 package vzap.greg.banking;
 
-public class BankClient
+import java.io.Serializable;
+
+public class BankClient implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String name = null;
 	private String surname = null;
 	private int clientID;
