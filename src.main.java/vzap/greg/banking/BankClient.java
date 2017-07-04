@@ -4,29 +4,33 @@ public class BankClient
 {
 	private String name = null;
 	private String surname = null;
-	private BankCard bankCard = null;
-	private String idNumber = null;
+	private int clientID;
+	private String email = null;
+	private String cellNumber = null;
+	private String isActive = null;
 	
-	public BankClient(String name, String surname, BankCard bankCard, String idNumber)
+	public BankClient(int idNumber, String name, String surname, String email, String cellNumber, String isActive)
 	{
 		super();
 		this.name = name;
 		this.surname = surname;
-		this.bankCard = bankCard;
-		this.idNumber = toString();
+		this.clientID = idNumber;
+		this.cellNumber = cellNumber;
+		this.isActive = isActive;
+		this.email = email;
 	}
-	public BankClient(String name, String surname, String idNumber)
+	public BankClient(int idNumber, String name, String surname )
 	{
-		this(name, surname, null, idNumber);
+		this(idNumber, name, surname, null, null, "y");
 	}
 	
 	public String getIdNumber()
 	{
-		return this.idNumber;
+		return this.clientID;
 	}
 	public void setIdNumber(String idNumber)
 	{
-		this.idNumber = idNumber;
+		this.clientID = idNumber;
 	}
 	public String getName()
 	{
@@ -56,6 +60,6 @@ public class BankClient
 	public String toString()
 	{
 		return "BankClient [name=" + this.name + ", surname=" + this.surname + ", bankCard=" + this.bankCard
-				+ ", idNumber=" + this.idNumber + "]";
+				+ ", idNumber=" + this.clientID + "]";
 	}
 }

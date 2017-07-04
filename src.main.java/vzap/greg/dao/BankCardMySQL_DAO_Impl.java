@@ -34,7 +34,7 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 		try
 		{
 			FileInputStream input = new FileInputStream("./resources/dbConfig.properties");
-
+			dbProperties = new Properties();
 			// load a properties file
 			dbProperties.load(input);
 			input.close();
@@ -46,7 +46,7 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 			this.portNumber = dbProperties.getProperty("portnumber");
 			url = "jdbc:mysql://" + this.ipAddress + ":" + this.portNumber + "/" + this.databaseName;
 			System.out.println("url = " + url);
-			mysqlConnection = new MySQL_Connection(url, username, password);
+			mysqlConnection = new MySQL_Connection(databaseName, username, password);
 			dbConnection = mysqlConnection.getConnection();
 			System.out.println("Connected to database;");
 		}
@@ -67,20 +67,24 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 		}
 	}
 	
-	public void closeConnection()
+	public boolean closeConnection()
 	{
 		try
 		{
 			if(dbConnection != null)
 			{
 				mysqlConnection.closeConnection();
+				System.out.println("mysql connection closed..>>>>");
+				return true;
 			}
 		}
 		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	@Override
@@ -113,6 +117,56 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 			this.closeConnection();
 		}
 		return false;
+	}
+
+	public MySQL_Connection getMysqlConnection()
+	{
+		return this.mysqlConnection;
+	}
+
+	public Connection getDbConnection()
+	{
+		return this.dbConnection;
+	}
+
+	public Properties getDbProperties()
+	{
+		return this.dbProperties;
+	}
+
+	public String getUsername()
+	{
+		return this.username;
+	}
+
+	public String getPassword()
+	{
+		return this.password;
+	}
+
+	public String getDatabaseName()
+	{
+		return this.databaseName;
+	}
+
+	public String getIpAddress()
+	{
+		return this.ipAddress;
+	}
+
+	public String getPortNumber()
+	{
+		return this.portNumber;
+	}
+
+	public String getUrl()
+	{
+		return this.url;
+	}
+	public static void main(String[] args)
+	{
+		BankCardMySQL_DAO_Impl card = new BankCardMySQL_DAO_Impl();
+		
 	}
 	
 }
