@@ -8,7 +8,7 @@ import java.io.*;
 //import java.net.Socket;
 
 import vzap.greg.session.ATM_Session;
-//import ATM_UserInterfaces.ATM_UserInterfaceJFrame;
+
 
 @SuppressWarnings("all")
 public class ATM_Machine
