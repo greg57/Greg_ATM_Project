@@ -60,7 +60,7 @@ public class VZAP_BankServer
 			this.socketFromAccept = socketFromAccept;
 			try
 			{
-				bankCardDAO = new BankCardDAO_Impl();
+				bankCardDAO = new BankCardMySQL_DAO_Impl();
 				inputFromClient = new ObjectInputStream(
 						socketFromAccept.getInputStream());
 				outputToClient = new ObjectOutputStream(

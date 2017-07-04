@@ -145,8 +145,8 @@ public class ATM_Machine
 //		return atmFrame;
 //	}
 
-//	public static void main(String[] args)
-//	{
-//		ATM_Machine atmM = new ATM_Machine();
-//	}
+	public static void main(String[] args)
+	{
+		ATM_Machine atmM = new ATM_Machine();
+	}
 }
