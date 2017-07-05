@@ -6,12 +6,22 @@ import java.util.Date;
 public class SavingsAccount extends Account implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private double interestRateOnSavings = 6.6;
 	
-	public SavingsAccount(BankCard accountCard, Date dateCreated,
-			Money bankCharges, Money balance)
+	public SavingsAccount(Date dateCreated, Money bankCharges, Money balance)
 	{
-		super(accountCard, dateCreated, bankCharges, balance);
+		super(dateCreated, bankCharges, balance);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public double getInterestRateOnSavings()
+	{
+		return this.interestRateOnSavings;
+	}
+
+	public void setInterestRateOnSavings(double interestRateOnSavings)
+	{
+		this.interestRateOnSavings = interestRateOnSavings;
 	}
 
 	@Override
@@ -27,6 +37,6 @@ public class SavingsAccount extends Account implements Serializable
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	public 
 
 }
