@@ -2,6 +2,7 @@ package vzap.greg.server;
 
 import java.io.*;
 import java.net.*;
+import java.util.Properties;
 
 import vzap.greg.banking.*;
 import vzap.greg.dao.*;
@@ -20,8 +21,28 @@ public class VZAP_BankServer
 
 	public VZAP_BankServer()
 	{
+		Properties serverProperties  = new Properties();
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/atmServer.properties");
+			serverProperties.load(in);
+			in.close();
+			listeningPort = Integer.parseInt(serverProperties.getProperty("serverPortNumber"));
+			System.out.println("Server's Listening port = " + listeningPort);
+		}
+		catch (FileNotFoundException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		runServer = true;
-		listeningPort = 10000;
+		//listeningPort = 10000;
 		try
 		{
 			serverSocket = new ServerSocket(listeningPort);
@@ -33,12 +54,12 @@ public class VZAP_BankServer
 
 		while (runServer == true)
 		{
-			System.out.println("Server in Listening mode on port 10000...>>>");
+			System.out.println("Server in Listening mode on port " + listeningPort + "...>>>");
 			try
 			{
 				socketFromAccept = serverSocket.accept();
 				bankServerThread = new VZAP_BankServerThread(socketFromAccept);
-				bankServerThread.start();
+				//bankServerThread.start();
 			}
 			catch (IOException e)
 			{
