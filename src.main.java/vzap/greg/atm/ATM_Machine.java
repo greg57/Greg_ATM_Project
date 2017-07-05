@@ -16,7 +16,7 @@ public class ATM_Machine
 	
 	private ATM_Card_Reader cardReader = null;
 	private ATM_Cash_Dispencer cashDispencer = null;
-	private ATM_Envelope_Accepter envelopeAcceptor = null;
+	private ATM_Notes_Accepter envelopeAcceptor = null;
 	private ATM_Session atmSession = null;
 	private Properties atmProperties = null;
 	private FileInputStream atmPropertiesInput = null;
@@ -85,7 +85,7 @@ public class ATM_Machine
 		return cashDispencer;
 	}
 
-	public ATM_Envelope_Accepter getEnvelopeAcceptor()
+	public ATM_Notes_Accepter getEnvelopeAcceptor()
 	{
 		return envelopeAcceptor;
 	}

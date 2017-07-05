@@ -17,6 +17,12 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CardReaderPanel extends JPanel
 {
@@ -39,6 +45,8 @@ public class CardReaderPanel extends JPanel
 	private JPasswordField pinJTF;
 	private JButton btnEnter;
 	private JButton btnCancel;
+	private JPanel cardNumberPanel;
+	private JTextField cardNumberJTF;
 
 	/**
 	 * Create the panel.
@@ -64,35 +72,64 @@ public class CardReaderPanel extends JPanel
 		pinPanel.setBackground(new Color(127, 255, 0));
 		pinPanel.setBorder(
 				new TitledBorder(null, "PIN Code", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+
+		cardNumberPanel = new JPanel();
+		cardNumberPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Enter Card Number",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
+		cardNumberPanel.setBackground(new Color(127, 255, 0));
+
+		cardNumberJTF = new JTextField();
+		cardNumberJTF.addKeyListener(new CardNumberJTFKeyListener());
+		cardNumberJTF.setFont(new Font("Tahoma", Font.BOLD, 30));
+		cardNumberJTF.setColumns(10);
+		GroupLayout gl_cardNumberPanel = new GroupLayout(cardNumberPanel);
+		gl_cardNumberPanel.setHorizontalGroup(
+				gl_cardNumberPanel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+						gl_cardNumberPanel.createSequentialGroup().addContainerGap()
+								.addComponent(cardNumberJTF, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+								.addContainerGap()));
+		gl_cardNumberPanel.setVerticalGroup(gl_cardNumberPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_cardNumberPanel.createSequentialGroup().addContainerGap()
+						.addComponent(cardNumberJTF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		cardNumberPanel.setLayout(gl_cardNumberPanel);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
 				.createSequentialGroup()
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(325).addComponent(lblVzapBank,
-								GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(75)
-								.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 387, GroupLayout.PREFERRED_SIZE)
-								.addGap(54).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 488,
-										GroupLayout.PREFERRED_SIZE)))
+						.addGroup(
+								groupLayout.createSequentialGroup().addGap(325).addComponent(lblVzapBank,
+										GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup().addGap(75).addGroup(groupLayout
+								.createParallelGroup(Alignment.LEADING).addComponent(cardNumberPanel,
+										GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 387,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(54).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 488,
+												GroupLayout.PREFERRED_SIZE)))))
 				.addContainerGap(40, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(560, Short.MAX_VALUE)
 						.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
 						.addGap(127)));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-						.createSequentialGroup()
-						.addGap(43).addComponent(lblVzapBank).addGroup(groupLayout
-								.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(129)
-										.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE,
-												83, GroupLayout.PREFERRED_SIZE)
-										.addGap(61).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 298,
-												GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup().addGap(259).addComponent(keyPanel,
-										GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(41, Short.MAX_VALUE)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addGap(43).addComponent(lblVzapBank).addGap(
+						129)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addGap(61).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 298,
+										GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(cardNumberPanel, GroupLayout.PREFERRED_SIZE, 83,
+										GroupLayout.PREFERRED_SIZE)
+								.addGap(47)
+								.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap(41, Short.MAX_VALUE)));
 
 		pinJTF = new JPasswordField();
+		pinJTF.setEnabled(false);
 		pinJTF.setFont(new Font("Tahoma", Font.BOLD, 30));
 		GroupLayout gl_pinPanel = new GroupLayout(pinPanel);
 		gl_pinPanel.setHorizontalGroup(gl_pinPanel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -105,6 +142,7 @@ public class CardReaderPanel extends JPanel
 		keyPanel.setLayout(new GridLayout(4, 3, 0, 0));
 
 		button_1 = new JButton("1");
+		button_1.addActionListener(new Button_1ActionListener());
 		button_1.setBorder(new LineBorder(Color.RED));
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 25));
 		keyPanel.add(button_1);
@@ -162,6 +200,7 @@ public class CardReaderPanel extends JPanel
 		keyPanel.add(btn0);
 
 		btnEnter = new JButton("Enter");
+		btnEnter.addActionListener(new BtnEnterActionListener());
 		btnEnter.setForeground(new Color(0, 0, 0));
 		btnEnter.setBackground(new Color(0, 255, 127));
 		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -194,6 +233,47 @@ public class CardReaderPanel extends JPanel
 						.addGap(22)));
 		cardReaderPanel.setLayout(gl_cardReaderPanel);
 		setLayout(groupLayout);
+		cardNumberJTF.requestFocus();
+	}
 
+	private class Button_1ActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if (cardNumberJTF.isEnabled())
+			{
+				cardNumberJTF.setText(cardNumberJTF.getText() + "1");
+			}
+			if (pinJTF.isEnabled())
+			{
+				pinJTF.setText(pinJTF.getText() + "1");
+			}
+		}
+	}
+
+	private class BtnEnterActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if ((cardNumberJTF.isEnabled()) && (pinJTF.isDisplayable()))
+			{
+				System.out.println("cardNumberJTF is enabled..>>>>");
+				cardNumberJTF.setEnabled(false);
+				pinJTF.setEnabled(true);
+			}
+		}
+	}
+
+	private class CardNumberJTFKeyListener extends KeyAdapter
+	{
+		@Override
+		public void keyTyped(KeyEvent ke)
+		{
+			char ch = ke.getKeyChar();
+			if ((ch < '0') || (ch > '9'))
+			{
+				ke.consume();
+			}
+		}
 	}
 }
