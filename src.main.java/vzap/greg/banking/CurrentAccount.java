@@ -9,9 +9,9 @@ public class CurrentAccount extends Account implements Serializable
 	
 	
 
-	public CurrentAccount(BankClient bankClient, Date dateCreated, Money bankCharges, Money balance)
+	public CurrentAccount(BankCard bankCard, Date dateCreated, Money bankCharges, Money balance)
 	{
-		super(bankClient, dateCreated, bankCharges, balance);
+		super(bankCard, dateCreated, bankCharges, balance);
 		// TODO Auto-generated constructor stub
 	}
 

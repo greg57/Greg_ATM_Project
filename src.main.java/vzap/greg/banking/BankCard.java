@@ -15,6 +15,7 @@ public class BankCard implements Serializable
 	private int clientid;
 	private boolean isAdmin;
 	private boolean isActive;
+	private Vector<Account> accounts = null;
 	public BankCard(String cardNumber, String pinNumber, int clientid, boolean isAdmin, boolean isActive)
 	{
 		super();
@@ -25,6 +26,16 @@ public class BankCard implements Serializable
 		this.isActive = isActive;
 	}
 	
+	public Vector<Account> getAccounts()
+	{
+		return this.accounts;
+	}
+
+	public void setAccounts(Vector<Account> accounts)
+	{
+		this.accounts = accounts;
+	}
+
 	public BankCard(String cardNumber, String pinNumber)
 	{
 		this(cardNumber, pinNumber, 0, false, true);

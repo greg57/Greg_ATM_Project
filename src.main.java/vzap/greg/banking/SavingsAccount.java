@@ -8,9 +8,9 @@ public class SavingsAccount extends Account implements Serializable
 	private static final long serialVersionUID = 1L;
 	private double interestRateOnSavings = 6.6;
 	
-	public SavingsAccount(Date dateCreated, Money bankCharges, Money balance)
+	public SavingsAccount(BankCard bankCard, Date dateCreated, Money bankCharges, Money balance)
 	{
-		super(dateCreated, bankCharges, balance);
+		super(bankCard, dateCreated, bankCharges, balance);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -37,6 +37,5 @@ public class SavingsAccount extends Account implements Serializable
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public 
 
 }
