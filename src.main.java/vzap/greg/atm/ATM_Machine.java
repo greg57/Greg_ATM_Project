@@ -63,7 +63,7 @@ public class ATM_Machine
 			
 			atmSession = new ATM_Session(serverIP_Address, serverPortNumber);
 
-			cardReader = new ATM_Card_Reader(this);
+			cardReader = new ATM_Card_Reader();
 			System.out.println("Session with server started...>>>");
 			
 			//atmFrame = new ATM_UserInterfaceJFrame(this);

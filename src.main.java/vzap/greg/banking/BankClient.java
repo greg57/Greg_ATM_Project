@@ -12,8 +12,9 @@ public class BankClient implements Serializable
 	private String email = null;
 	private String cellNumber = null;
 	private String isActive = null;
+	private BankCard bankCard = null;
 	
-	public BankClient(int idNumber, String name, String surname, String email, String cellNumber, String isActive)
+	public BankClient(int idNumber, String name, String surname, String email, String cellNumber, String isActive, BankCard bankCard)
 	{
 		super();
 		this.name = name;
@@ -22,13 +23,21 @@ public class BankClient implements Serializable
 		this.cellNumber = cellNumber;
 		this.isActive = isActive;
 		this.email = email;
+		this.bankCard = bankCard;
 	}
 	public BankClient(int idNumber, String name, String surname )
 	{
-		this(idNumber, name, surname, null, null, "y");
+		this(idNumber, name, surname, null, null, "y", null);
 	}
 	
-	
+	public BankCard getBankCard()
+	{
+		return this.bankCard;
+	}
+	public void setBankCard(BankCard bankCard)
+	{
+		this.bankCard = bankCard;
+	}
 	public String getName()
 	{
 		return this.name;

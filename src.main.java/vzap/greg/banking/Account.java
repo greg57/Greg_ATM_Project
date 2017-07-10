@@ -7,7 +7,7 @@ public abstract class Account implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private BankClient bankClient;
+	private BankCard bankCard;
 	private String accountNumber = null;
 	private Date dateCreated = null;
 	private Money bankCharges = null;
@@ -15,19 +15,39 @@ public abstract class Account implements Serializable
 	
 	
 	
-	public Account(BankClient bankClient, Date dateCreated, Money bankCharges, Money balance)
+	public Account(BankCard bankCard, Date dateCreated, Money bankCharges, Money balance)
 	{
 		super();
-		this.bankClient = bankClient;
+		this.bankCard = bankCard;
 		this.dateCreated = dateCreated;
 		this.bankCharges = bankCharges;
 		this.balance = balance;
 	}
-	public Account(BankClient bankClient, Money balance)
+	public Account(BankCard bankCard, Money balance)
 	{
-		this(bankClient, null, null, balance);
+		this(bankCard, null, null, balance);
 	}
 	
+	public BankCard getBankCard()
+	{
+		return this.bankCard;
+	}
+	public void setBankCard(BankCard bankCard)
+	{
+		this.bankCard = bankCard;
+	}
+	public void setAccountNumber(String accountNumber)
+	{
+		this.accountNumber = accountNumber;
+	}
+	public void setDateCreated(Date dateCreated)
+	{
+		this.dateCreated = dateCreated;
+	}
+	public void setBankCharges(Money bankCharges)
+	{
+		this.bankCharges = bankCharges;
+	}
 	public void setBalance(Money balance)
 	{
 		this.balance = balance;
@@ -51,11 +71,6 @@ public abstract class Account implements Serializable
 	public Money getBalance()
 	{
 		return balance;
-	}
-	
-	public BankClient getBankClient()
-	{
-		return this.bankClient;
 	}
 	
 	
