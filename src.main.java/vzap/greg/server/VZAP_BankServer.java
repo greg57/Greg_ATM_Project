@@ -60,7 +60,7 @@ public class VZAP_BankServer
 			{
 				socketFromAccept = serverSocket.accept();
 				bankServerThread = new VZAP_BankServerThread(socketFromAccept);
-				//bankServerThread.start();
+				bankServerThread.start();
 			}
 			catch (IOException e)
 			{
@@ -84,10 +84,11 @@ public class VZAP_BankServer
 			try
 			{
 				bankCardDAO = new BankCardMySQL_DAO_Impl();
-				inputFromClient = new ObjectInputStream(
-						socketFromAccept.getInputStream());
 				outputToClient = new ObjectOutputStream(
 						socketFromAccept.getOutputStream());
+				inputFromClient = new ObjectInputStream(
+						socketFromAccept.getInputStream());
+				
 			}
 			catch (Exception e)
 			{

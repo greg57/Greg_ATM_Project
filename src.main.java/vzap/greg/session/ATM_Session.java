@@ -19,8 +19,8 @@ public class ATM_Session
 	public ATM_Session(String serverIP_Address, int portNumber) throws UnknownHostException, IOException
 	{
 		socket = new Socket(serverIP_Address, portNumber);
-		//socketInput = new ObjectInputStream(socket.getInputStream());
-		//socketOutput = new ObjectOutputStream(socket.getOutputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
+		socketOutput = new ObjectOutputStream(socket.getOutputStream());
 	}
 	
 	public void setSocketInput(ObjectInputStream socketInput)

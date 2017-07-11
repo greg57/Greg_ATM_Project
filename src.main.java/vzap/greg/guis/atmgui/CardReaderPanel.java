@@ -17,12 +17,18 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
+
+import vzap.greg.banking.BankCard;
+import vzap.greg.banking.BankClient;
+import vzap.greg.dto.ATM_ServerDTO;
+
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class CardReaderPanel extends JPanel
 {
@@ -49,12 +55,14 @@ public class CardReaderPanel extends JPanel
 	private JTextField cardNumberJTF;
 	private JPanel mesagePanel;
 	private JTextField messageJTF;
+	private JPanel basePanel;
 
 	/**
 	 * Create the panel.
 	 */
-	public CardReaderPanel()
+	public CardReaderPanel(JPanel basePanel)
 	{
+		this.basePanel = basePanel;
 		setBackground(new Color(255, 255, 255));
 
 		lblVzapBank = new JLabel("VZAP Bank");
@@ -278,6 +286,20 @@ public class CardReaderPanel extends JPanel
 				pinJTF.setText("");
 				cardNumberJTF.requestFocus();
 				return;
+			}
+			BankCard bankCard = new BankCard(cardNumberJTF.getText(), new String(pinJTF.getPassword()));
+			BankClient bankClient = new BankClient(bankCard);
+			String messageToServer = "validate card";
+			ATM_ServerDTO dto = new ATM_ServerDTO(bankClient, messageToServer, null,
+					ATM_MainGUI.atmMachine.getAtmProperties());
+			try
+			{
+				ATM_MainGUI.atmMachine.getAtmSession().getSocketOutput().writeObject(dto);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

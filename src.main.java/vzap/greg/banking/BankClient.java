@@ -29,6 +29,11 @@ public class BankClient implements Serializable
 	{
 		this(idNumber, name, surname, null, null, "y", null);
 	}
+	public BankClient(BankCard bankCard)
+	{
+		this(0, null, null, null, null, "y", bankCard);
+	}
+	
 	
 	public BankCard getBankCard()
 	{

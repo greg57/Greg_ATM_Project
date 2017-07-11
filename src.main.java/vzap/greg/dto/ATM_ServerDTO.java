@@ -1,6 +1,7 @@
 package vzap.greg.dto;
 
 import java.io.Serializable;
+import java.util.Properties;
 
 import vzap.greg.atm.ATM_Machine;
 import vzap.greg.banking.BankClient;
@@ -11,16 +12,15 @@ public class ATM_ServerDTO implements Serializable
 	private BankClient bankClient = null;
 	private String messageToServer = null;
 	private String messageFromServer = null;
-	private ATM_Machine atmMachine = null;
+	private Properties atmProperties = null;
 	
-	public ATM_ServerDTO(BankClient bankClient, String messageToServer, String messageFromServer,
-			ATM_Machine atmMachine)
+	public ATM_ServerDTO(BankClient bankClient, String messageToServer, String messageFromServer, Properties atmProperties)
 	{
 		super();
 		this.bankClient = bankClient;
 		this.messageToServer = messageToServer;
 		this.messageFromServer = messageFromServer;
-		this.atmMachine = atmMachine;
+		this.atmProperties = atmProperties;
 	}
 
 	public static long getSerialversionuid()
@@ -43,16 +43,16 @@ public class ATM_ServerDTO implements Serializable
 		return this.messageFromServer;
 	}
 
-	public ATM_Machine getAtmMachine()
+	public Properties getAtmProperties()
 	{
-		return this.atmMachine;
+		return atmProperties;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "ATM_ServerDTO [bankClient=" + this.bankClient + ", messageToServer=" + this.messageToServer
-				+ ", messageFromServer=" + this.messageFromServer + ", atmMachine=" + this.atmMachine + "]";
+				+ ", messageFromServer=" + this.messageFromServer + ", atmProperties=" + this.atmProperties + "]";
 	}
 	
 	
