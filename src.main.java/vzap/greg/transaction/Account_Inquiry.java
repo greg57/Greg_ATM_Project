@@ -1,6 +1,8 @@
 package vzap.greg.transaction;
 
-public class Account_Inquiry
+import java.io.Serializable;
+
+public class Account_Inquiry implements Serializable
 {
 
 }

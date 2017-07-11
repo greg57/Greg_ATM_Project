@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import vzap.greg.banking.*;
 import vzap.greg.dao.*;
+import vzap.greg.dto.ATM_ServerDTO;
 import vzap.greg.exception.*;
 
 
@@ -75,6 +76,7 @@ public class VZAP_BankServer
 		private ObjectInputStream inputFromClient = null;
 		private ObjectOutputStream outputToClient = null;
 		private BankCardDAO bankCardDAO = null;
+		private ATM_ServerDTO dto = null;
 
 		public VZAP_BankServerThread(Socket socketFromAccept)
 		{
@@ -101,7 +103,8 @@ public class VZAP_BankServer
 			{
 				System.out.println("got connection from client: "
 						+ socketFromAccept.toString());
-				messageFromClient = (String)inputFromClient.readObject();
+				dto = (ATM_ServerDTO)inputFromClient.readObject();
+				messageFromClient = dto.getMessageToServer();
 				System.out.println("<<<<...Message From Client...>>>> : " + messageFromClient);
 				BankCard card = (BankCard) inputFromClient.readObject();
 				System.out.println("Bank Card details Card No: "

@@ -1,6 +1,8 @@
 package vzap.greg.banking;
 
-public class BankEmployee
+import java.io.Serializable;
+
+public class BankEmployee implements Serializable
 {
 	private String name = null;
 	private String surname = null;

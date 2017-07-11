@@ -11,7 +11,7 @@ import vzap.greg.session.ATM_Session;
 
 
 @SuppressWarnings("all")
-public class ATM_Machine
+public class ATM_Machine implements Serializable
 {
 	
 	private ATM_Card_Reader cardReader = null;

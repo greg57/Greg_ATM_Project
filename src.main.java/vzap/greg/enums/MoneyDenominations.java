@@ -1,6 +1,8 @@
 package vzap.greg.enums;
 
-public enum MoneyDenominations
+import java.io.Serializable;
+
+public enum MoneyDenominations implements Serializable
 {
 	R200(200),
 	R100(100),
