@@ -1,6 +1,8 @@
 package vzap.greg.atm;
 
-public class ATM_Printer
+import java.io.Serializable;
+
+public class ATM_Printer implements Serializable
 {
 
 }

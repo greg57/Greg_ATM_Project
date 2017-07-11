@@ -1,5 +1,6 @@
 package vzap.greg.transaction;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import vzap.greg.atm.ATM_Machine;
@@ -7,7 +8,7 @@ import vzap.greg.banking.BankClient;
 import vzap.greg.banking.Money;
 import vzap.greg.enums.TransactionType;
 
-public abstract class Transaction
+public abstract class Transaction implements Serializable
 {
 	private ATM_Machine atm = null;
 	private BankClient bankClient = null;

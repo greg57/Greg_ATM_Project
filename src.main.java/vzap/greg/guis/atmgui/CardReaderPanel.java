@@ -17,12 +17,18 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
+
+import vzap.greg.banking.BankCard;
+import vzap.greg.banking.BankClient;
+import vzap.greg.dto.ATM_ServerDTO;
+
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class CardReaderPanel extends JPanel
 {
@@ -47,12 +53,16 @@ public class CardReaderPanel extends JPanel
 	private JButton btnCancel;
 	private JPanel cardNumberPanel;
 	private JTextField cardNumberJTF;
+	private JPanel mesagePanel;
+	private JTextField messageJTF;
+	private JPanel basePanel;
 
 	/**
 	 * Create the panel.
 	 */
-	public CardReaderPanel()
+	public CardReaderPanel(JPanel basePanel)
 	{
+		this.basePanel = basePanel;
 		setBackground(new Color(255, 255, 255));
 
 		lblVzapBank = new JLabel("VZAP Bank");
@@ -94,6 +104,9 @@ public class CardReaderPanel extends JPanel
 								GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		cardNumberPanel.setLayout(gl_cardNumberPanel);
+
+		mesagePanel = new JPanel();
+		mesagePanel.setBorder(new LineBorder(Color.BLUE, 2));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
 				.createSequentialGroup()
@@ -112,10 +125,15 @@ public class CardReaderPanel extends JPanel
 				.addContainerGap(40, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(560, Short.MAX_VALUE)
 						.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
-						.addGap(127)));
+						.addGap(127))
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap(92, Short.MAX_VALUE)
+						.addComponent(mesagePanel, GroupLayout.PREFERRED_SIZE, 897, GroupLayout.PREFERRED_SIZE)
+						.addGap(55)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addGap(43).addComponent(lblVzapBank).addGap(
-						129)
+				.createSequentialGroup().addGap(43).addComponent(lblVzapBank).addGap(48)
+				.addComponent(mesagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addGap(38)
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
@@ -127,9 +145,15 @@ public class CardReaderPanel extends JPanel
 								.addGap(47)
 								.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(41, Short.MAX_VALUE)));
+		mesagePanel.setLayout(new GridLayout(1, 1, 0, 0));
+
+		messageJTF = new JTextField();
+		messageJTF.setForeground(Color.RED);
+		messageJTF.setFont(new Font("Tahoma", Font.BOLD, 26));
+		mesagePanel.add(messageJTF);
+		messageJTF.setColumns(10);
 
 		pinJTF = new JPasswordField();
-		pinJTF.setEnabled(false);
 		pinJTF.setFont(new Font("Tahoma", Font.BOLD, 30));
 		GroupLayout gl_pinPanel = new GroupLayout(pinPanel);
 		gl_pinPanel.setHorizontalGroup(gl_pinPanel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -255,11 +279,27 @@ public class CardReaderPanel extends JPanel
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if ((cardNumberJTF.isEnabled()) && (pinJTF.isDisplayable()))
+			if ((cardNumberJTF.getText().equals("")) || (pinJTF.getText().equals("")))
 			{
-				System.out.println("cardNumberJTF is enabled..>>>>");
-				cardNumberJTF.setEnabled(false);
-				pinJTF.setEnabled(true);
+				messageJTF.setText("You must fill in your card and PIN numbers");
+				cardNumberJTF.setText("");
+				pinJTF.setText("");
+				cardNumberJTF.requestFocus();
+				return;
+			}
+			BankCard bankCard = new BankCard(cardNumberJTF.getText(), new String(pinJTF.getPassword()));
+			BankClient bankClient = new BankClient(bankCard);
+			String messageToServer = "validate card";
+			ATM_ServerDTO dto = new ATM_ServerDTO(bankClient, messageToServer, null,
+					ATM_MainGUI.atmMachine.getAtmProperties());
+			try
+			{
+				ATM_MainGUI.atmMachine.getAtmSession().getSocketOutput().writeObject(dto);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

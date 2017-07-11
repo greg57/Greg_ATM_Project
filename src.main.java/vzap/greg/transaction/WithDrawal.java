@@ -1,14 +1,14 @@
 package vzap.greg.transaction;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import vzap.greg.atm.ATM_Machine;
-import vzap.greg.banking.Account;
 import vzap.greg.banking.BankClient;
 import vzap.greg.banking.Money;
 import vzap.greg.enums.TransactionType;
 
-public class WithDrawal extends Transaction
+public class WithDrawal extends Transaction implements Serializable
 {
 
 	public WithDrawal(ATM_Machine atm, BankClient bankClient, Date dateAndTime, TransactionType transactionType,

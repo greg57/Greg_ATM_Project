@@ -1,5 +1,6 @@
 package vzap.greg.atm;
 
+import java.io.Serializable;
 import java.util.HashMap;
 //import java.util.HashSet;
 
@@ -8,7 +9,7 @@ import vzap.greg.enums.MoneyDenominations;
 import vzap.greg.exception.ATM_Cash_DispenserException;
 
 @SuppressWarnings("unused")
-public class ATM_Cash_Dispencer
+public class ATM_Cash_Dispencer implements Serializable
 {
 	private ATM_Machine atmMachine = null;
 	private Money totalMoneyAvailable = null;

@@ -1,10 +1,12 @@
 package vzap.greg.atm;
 
+import java.io.Serializable;
+
 import vzap.greg.banking.BankCard;
 import vzap.greg.exception.BankCardException;
 
 @SuppressWarnings("all")
-public class ATM_Card_Reader
+public class ATM_Card_Reader implements Serializable
 {
 	private BankCard bankCard = null;
 	
