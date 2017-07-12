@@ -1,37 +1,48 @@
 package vzap.greg.connection;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 @SuppressWarnings("all")
 public class MySQL_Connection
 {
-	private String dbIpAddress = null;
-	private String dbName = null;
-	private String userName = null;
+	private Properties dbProperties = null; 
+	private String username = null;
 	private String password = null;
+	private String databaseName = null;
+	private String ipAddress = null;
+	private String portNumber = null;
+	private String url = null;
 	
 	private Connection connection = null;
 	
-	public MySQL_Connection(String dbIpAddress, String dbName, String userName,
-			String password) throws ClassNotFoundException, SQLException
+	public MySQL_Connection() throws ClassNotFoundException, SQLException, IOException
 	{
-		super();
-		this.dbIpAddress = dbIpAddress;
-		this.dbName = dbName;
-		this.userName = userName;
-		this.password = password;
+		FileInputStream input = new FileInputStream("./resources/dbConfig.properties");
+		dbProperties = new Properties();
+		// load a properties file
+		dbProperties.load(input);
+		input.close();
+
+		this.username = dbProperties.getProperty("username");
+		this.password = dbProperties.getProperty("password");
+		this.databaseName = dbProperties.getProperty("databasename");
+		this.ipAddress = dbProperties.getProperty("ipAddress");
+		this.portNumber = dbProperties.getProperty("portnumber");
+		url = "jdbc:mysql://" + this.ipAddress + ":" + this.portNumber + "/" + this.databaseName;
+		System.out.println("url = " + url);
+
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		
-		connection = DriverManager.getConnection("jdbc:mysql://" + dbIpAddress +
-				":3306/" + dbName, userName, password);
-	}
-	
-	public MySQL_Connection(String dbName, String userName, String password) throws ClassNotFoundException, SQLException
-	{
-		this("localhost", dbName, userName, password);
+		connection = DriverManager.getConnection("jdbc:mysql://" + ipAddress +
+				":3306/" + databaseName, username, password);
+		System.out.println("Connection to database made...>>>>>>");
 	}
 	
 	public Connection getConnection()

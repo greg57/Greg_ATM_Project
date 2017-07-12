@@ -1,5 +1,6 @@
 package vzap.greg.dao;
 
+import java.io.IOException;
 import java.sql.*;
 
 import vzap.greg.atm.ATM_Machine;
@@ -19,10 +20,10 @@ public class ATM_MachineDAO_Impl implements ATM_MachineDB_DAO
 	{
 		try
 		{
-			mysqlConnection = new MySQL_Connection("atm_bank_db", "root", "root");
+			mysqlConnection = new MySQL_Connection();
 			dbConnection = mysqlConnection.getConnection();
 		}
-		catch (ClassNotFoundException | SQLException e)
+		catch (ClassNotFoundException | SQLException | IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
