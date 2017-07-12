@@ -107,19 +107,23 @@ public class VZAP_BankServer
 				dto = (ATM_ServerDTO)inputFromClient.readObject();
 				messageFromClient = dto.getMessageToServer();
 				System.out.println("<<<<...Message From Client...>>>> : " + messageFromClient);
-				BankCard card = (BankCard) inputFromClient.readObject();
+				BankCard card = dto.getBankClient().getBankCard();
 				System.out.println("Bank Card details Card No: "
 						+ card.getCardNumber() + " Pin code: "
 						+ card.getPinNumber());
+				Properties atmProperties = dto.getAtmProperties();
+				System.out.println("ATM properties = " + atmProperties.toString());
 				boolean validBankCard = bankCardDAO.validateBankCard(card);
 				String messageToClient = null;
 				if (validBankCard == true)
 				{
 					messageToClient = new String("Card Accepted...>>>");
+					System.out.println("Validated card...>>>>>>");
 				}
 				else
 				{
 					messageToClient = new String("Card REJECTED...>>>");
+					System.out.println("Card rejected...>>>>>>");
 				}
 				outputToClient.writeObject(messageToClient);
 				outputToClient.flush();
