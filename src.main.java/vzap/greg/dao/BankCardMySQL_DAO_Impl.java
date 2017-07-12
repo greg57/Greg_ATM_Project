@@ -34,28 +34,9 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 			e.printStackTrace();
 		}
 	}
-	public boolean closeConnection()
-	{
-		try
-		{
-			if(dbConnection != null)
-			{
-				mysqlConnection.closeConnection();
-				//System.out.println("mysql connection closed..>>>>");
-				return true;
-			}
-		}
-		catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
 
 	@Override
-	public boolean validateBankCard(BankCard bankCard)
+	public BankCard validateBankCard(BankCard bankCard)
 	{
 		int rowsAffected = 0;
 		try
@@ -67,34 +48,46 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 			while(rs.next())
 			{
 				rowsAffected++;
+				String cardNumber = rs.getString(1);
+				int pinNumber = rs.getInt(2);
+				int clientID = rs.getInt(3);
+				String isAdmin = rs.getString(4);
+				String isFrozen = rs.getString(5);
+				BankCard bc = new BankCard()
 			}
 			if(rowsAffected > 0)
 			{
-				this.closeConnection();
+				mysqlConnection.closeConnection();
 				return true;
 			}
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-			this.closeConnection();
+			try
+			{
+				mysqlConnection.closeConnection();
+			}
+			catch (SQLException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			return false;
 		}
 		finally
 		{
-			this.closeConnection();
+			try
+			{
+				mysqlConnection.closeConnection();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
-	}
-
-	public MySQL_Connection getMysqlConnection()
-	{
-		return this.mysqlConnection;
-	}
-
-	public Connection getDbConnection()
-	{
-		return this.dbConnection;
 	}
 
 	public static void main(String[] args)
