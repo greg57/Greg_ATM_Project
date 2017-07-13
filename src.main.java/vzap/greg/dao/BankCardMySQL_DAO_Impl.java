@@ -53,12 +53,12 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 				int clientID = rs.getInt(3);
 				String isAdmin = rs.getString(4);
 				String isFrozen = rs.getString(5);
-				BankCard bc = new BankCard()
+				BankCard bc = new BankCard(cardNumber, pinNumber, clientID, )
 			}
 			if(rowsAffected > 0)
 			{
 				mysqlConnection.closeConnection();
-				return true;
+				return null;
 			}
 		}
 		catch (SQLException e)

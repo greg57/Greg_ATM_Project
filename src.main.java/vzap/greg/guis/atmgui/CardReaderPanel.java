@@ -287,7 +287,8 @@ public class CardReaderPanel extends JPanel
 				cardNumberJTF.requestFocus();
 				return;
 			}
-			BankCard bankCard = new BankCard(cardNumberJTF.getText(), new String(pinJTF.getPassword()));
+			BankCard bankCard = new BankCard(cardNumberJTF.getText(),
+					Integer.parseInt(new String(pinJTF.getPassword())));
 			BankClient bankClient = new BankClient(bankCard);
 			String messageToServer = "validate card";
 			ATM_ServerDTO dto = new ATM_ServerDTO(bankClient, messageToServer, null,

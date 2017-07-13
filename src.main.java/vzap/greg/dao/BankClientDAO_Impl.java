@@ -109,7 +109,7 @@ public class BankClientDAO_Impl implements BankClientDAO
 	public static void main(String[] args)
 	{
 		BankClientDAO_Impl bcd = new BankClientDAO_Impl();
-		BankCard bankCard = new BankCard("4701", "1234");
+		BankCard bankCard = new BankCard("4701", 1234);
 		BankClient bankClient = bcd.searchForBankClient(bankCard);
 		System.out.println(bankClient.toString());
 	}
