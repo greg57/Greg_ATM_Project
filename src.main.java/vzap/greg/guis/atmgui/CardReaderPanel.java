@@ -148,6 +148,8 @@ public class CardReaderPanel extends JPanel
 		mesagePanel.setLayout(new GridLayout(1, 1, 0, 0));
 
 		messageJTF = new JTextField();
+		messageJTF.setEnabled(false);
+		messageJTF.setEditable(false);
 		messageJTF.setForeground(Color.RED);
 		messageJTF.setFont(new Font("Tahoma", Font.BOLD, 26));
 		mesagePanel.add(messageJTF);

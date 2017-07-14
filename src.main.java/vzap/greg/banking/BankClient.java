@@ -95,7 +95,9 @@ public class BankClient implements Serializable
 	public String toString()
 	{
 		return "BankClient [name=" + this.name + ", surname=" + this.surname + ", clientID=" + this.clientID
-				+ ", email=" + this.email + ", cellNumber=" + this.cellNumber + ", isActive=" + this.isActive + "]";
+				+ ", email=" + this.email + ", cellNumber=" + this.cellNumber + ", isActive=" + this.isActive + 
+				" bank card No " + this.getBankCard().getCardNumber() + 
+				"Pin Number " + this.getBankCard().getPinNumber() + "]";
 	}
 	
 }

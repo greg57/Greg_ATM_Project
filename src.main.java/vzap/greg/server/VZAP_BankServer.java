@@ -77,6 +77,8 @@ public class VZAP_BankServer
 		private ObjectOutputStream outputToClient = null;
 		private BankCardDAO bankCardDAO = null;
 		private ATM_ServerDTO dto = null;
+		private BankClientDAO_Impl clientDAO = null;
+		private BankClient bankClient = null;
 
 		public VZAP_BankServerThread(Socket socketFromAccept)
 		{
@@ -84,6 +86,7 @@ public class VZAP_BankServer
 			try
 			{
 				bankCardDAO = new BankCardMySQL_DAO_Impl();
+				clientDAO = new BankClientDAO_Impl();
 				outputToClient = new ObjectOutputStream(
 						socketFromAccept.getOutputStream());
 				inputFromClient = new ObjectInputStream(
@@ -113,12 +116,14 @@ public class VZAP_BankServer
 						+ card.getPinNumber());
 				Properties atmProperties = dto.getAtmProperties();
 				System.out.println("ATM properties = " + atmProperties.toString());
-				boolean validBankCard = bankCardDAO.validateBankCard(card);
+				BankCard validBankCard = bankCardDAO.validateBankCard(card);
 				String messageToClient = null;
-				if (validBankCard == true)
+				if (validBankCard != null)
 				{
 					messageToClient = new String("Card Accepted...>>>");
 					System.out.println("Validated card...>>>>>>");
+					bankClient = clientDAO.searchForBankClient(validBankCard);
+					System.out.println("In server: \n" + bankClient.toString());
 				}
 				else
 				{

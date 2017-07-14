@@ -21,7 +21,7 @@ public class BankClientDAO_Impl implements BankClientDAO
 	private BankCard bankCard = null;
 	private BankClient bankClient = null;
 	
-	public static final String SEARCH_FOR_CLIENT = "select * from clienttable where cardNumber = ?";
+	public static final String SEARCH_FOR_CLIENT = "select * from clienttable where clientID = ?";
 	public static final String LIST_ALL_CLIENTS = "select * from clienttable";
 	
 	
@@ -84,9 +84,10 @@ public class BankClientDAO_Impl implements BankClientDAO
 		try
 		{
 			prepStmt = dbConnection.prepareStatement(SEARCH_FOR_CLIENT);
-			String cardNo = bankCard.getCardNumber();
-			prepStmt.setString(1, cardNo);
+			int clientID = bankCard.getClientid();
+			prepStmt.setInt(1, clientID);
 			rs = prepStmt.executeQuery();
+			//System.out.println("in BanlClientDAO card = " + bankCard.getCardNumber());
 			return bankClient;
 		}
 		catch (SQLException e)

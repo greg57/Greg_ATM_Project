@@ -5,5 +5,5 @@ import vzap.greg.banking.BankCard;
 
 public interface BankCardDAO
 {
-	public boolean validateBankCard(BankCard bankCard);
+	public BankCard validateBankCard(BankCard bankCard);
 }
