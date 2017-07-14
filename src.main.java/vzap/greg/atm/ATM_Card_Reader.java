@@ -9,6 +9,7 @@ import vzap.greg.exception.BankCardException;
 public class ATM_Card_Reader implements Serializable
 {
 	private BankCard bankCard = null;
+	private int pinNumberInt;
 	
 	public ATM_Card_Reader()
 	{
@@ -29,6 +30,7 @@ public class ATM_Card_Reader implements Serializable
 				throw new BankCardException("Pin Number cannot contain alpha characters");
 			}
 		}
+		pinNumberInt = Integer.parseInt(pinNumber);
 		
 		if(bankCardNumber.length() != 4)
 		{
@@ -42,7 +44,7 @@ public class ATM_Card_Reader implements Serializable
 			}
 		}
 		
-		return bankCard = new BankCard(bankCardNumber, pinNumber);
+		return bankCard = new BankCard(bankCardNumber, pinNumberInt);
 	}
 	public boolean ejectCard()
 	{

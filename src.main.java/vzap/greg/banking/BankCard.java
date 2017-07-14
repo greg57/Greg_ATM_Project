@@ -11,12 +11,12 @@ public class BankCard implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	private String cardNumber = null;
-	private String pinNumber = null;
+	private int pinNumber;
 	private int clientid;
 	private boolean isAdmin;
 	private boolean isActive;
 	private Vector<Account> accounts = null;
-	public BankCard(String cardNumber, String pinNumber, int clientid, boolean isAdmin, boolean isActive)
+	public BankCard(String cardNumber, int pinNumber, int clientid, boolean isAdmin, boolean isActive)
 	{
 		super();
 		this.cardNumber = cardNumber;
@@ -24,6 +24,15 @@ public class BankCard implements Serializable
 		this.clientid = clientid;
 		this.isAdmin = isAdmin;
 		this.isActive = isActive;
+	}
+	public BankCard(String cardNumber, int pinNumber)
+	{
+		this(cardNumber, pinNumber, 0, false, false);
+	}
+	
+	public BankCard(String cardNumber, int pinNumber, int clientid)
+	{
+		this(cardNumber, pinNumber, clientid, false, true);
 	}
 	
 	public Vector<Account> getAccounts()
@@ -36,16 +45,6 @@ public class BankCard implements Serializable
 		this.accounts = accounts;
 	}
 
-	public BankCard(String cardNumber, String pinNumber)
-	{
-		this(cardNumber, pinNumber, 0, false, true);
-	}
-
-	public BankCard(String cardNumber, String pinNumber, int clientid)
-	{
-		this(cardNumber, pinNumber, clientid, false, true);
-	}
-
 	public String getCardNumber()
 	{
 		return this.cardNumber;
@@ -56,12 +55,12 @@ public class BankCard implements Serializable
 		this.cardNumber = cardNumber;
 	}
 
-	public String getPinNumber()
+	public int getPinNumber()
 	{
 		return this.pinNumber;
 	}
 
-	public void setPinNumber(String pinNumber)
+	public void setPinNumber(int pinNumber)
 	{
 		this.pinNumber = pinNumber;
 	}
@@ -96,16 +95,7 @@ public class BankCard implements Serializable
 		this.isActive = isActive;
 	}
 
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((this.cardNumber == null) ? 0 : this.cardNumber.hashCode());
-		result = prime * result + this.clientid;
-		result = prime * result + ((this.pinNumber == null) ? 0 : this.pinNumber.hashCode());
-		return result;
-	}
+	
 
 	@Override
 	public boolean equals(Object obj)
@@ -126,12 +116,12 @@ public class BankCard implements Serializable
 			return false;
 		if (this.clientid != other.clientid)
 			return false;
-		if (this.pinNumber == null)
+		if (this.pinNumber == 0)
 		{
-			if (other.pinNumber != null)
+			if (other.pinNumber != 0)
 				return false;
 		}
-		else if (!this.pinNumber.equals(other.pinNumber))
+		else if (!(this.pinNumber == other.pinNumber))
 			return false;
 		return true;
 	}

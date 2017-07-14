@@ -52,13 +52,32 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 				int pinNumber = rs.getInt(2);
 				int clientID = rs.getInt(3);
 				String isAdmin = rs.getString(4);
+				boolean isAdminTF;
+				boolean isFrozenTF;
+				if(isAdmin.equals("y"))
+				{
+					isAdminTF = true;
+				}
+				else
+				{
+					isAdminTF = false;
+				}
 				String isFrozen = rs.getString(5);
-				BankCard bc = new BankCard()
+				if(isFrozen.equals("y"))
+				{
+					isFrozenTF = true;
+				}
+				else
+				{
+					isFrozenTF = false;
+				}
+				BankCard bc = new BankCard(cardNumber, pinNumber, clientID, isAdminTF, isFrozenTF);
+				return bc;
 			}
 			if(rowsAffected > 0)
 			{
 				mysqlConnection.closeConnection();
-				return true;
+				return null;
 			}
 		}
 		catch (SQLException e)
@@ -73,23 +92,10 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			return false;
+			return null;
 		}
-		finally
-		{
-			try
-			{
-				mysqlConnection.closeConnection();
-			}
-			catch (SQLException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return false;
+		return null;
 	}
-
 	public static void main(String[] args)
 	{
 		BankCardMySQL_DAO_Impl card = new BankCardMySQL_DAO_Impl();
