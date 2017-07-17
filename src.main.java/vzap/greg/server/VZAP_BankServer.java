@@ -129,8 +129,11 @@ public class VZAP_BankServer
 				{
 					messageToClient = new String("Card REJECTED...>>>");
 					System.out.println("Card rejected...>>>>>>");
+					bankClient = null;
 				}
 				outputToClient.writeObject(messageToClient);
+				outputToClient.flush();
+				outputToClient.writeObject(bankClient);
 				outputToClient.flush();
 
 				outputToClient.close();

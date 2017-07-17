@@ -5,14 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
+import vzap.greg.banking.Account;
 import vzap.greg.banking.BankCard;
 import vzap.greg.banking.BankClient;
 import vzap.greg.connection.MySQL_Connection;
-import vzap.greg.exception.BankCardException;
 
-public class BankClientDAO_Impl implements BankClientDAO
+public class BankClientAccountDAO
 {
 	private MySQL_Connection mysqlConnection  = null;
 	private Connection dbConnection = null;
@@ -20,13 +20,14 @@ public class BankClientDAO_Impl implements BankClientDAO
 	private ResultSet rs = null;
 	private BankCard bankCard = null;
 	private BankClient bankClient = null;
+	private ArrayList<Account> bankAcounts;
 	
-	public static final String SEARCH_FOR_CLIENT = "select * from clienttable where clientID = ?";
-	public static final String LIST_ALL_CLIENTS = "select * from clienttable";
+	public static final String SEARCH_FOR_CLIENT_ACCOUNTS = "select * from accounttable where clientID = ?";
+	public static final String LIST_ALL_CLIENTS = "select * from accounttable";
 	
 	
 	
-	public BankClientDAO_Impl() 
+	public BankClientAccountDAO() 
 	{
 		super();
 		try
@@ -41,55 +42,18 @@ public class BankClientDAO_Impl implements BankClientDAO
 		}
 		
 	}
-
-	@Override
-	public List<BankClient> listBankClients()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BankClient searchForBankClient(String surname, String idNumber)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean updateBankClient(BankClient bankClient)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteBankClient(BankClient bankClient)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean insertNewBankClient(BankClient bankClient)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public BankClient searchForBankClient(BankCard bankCard)
+	public Account searchForClientAccount(BankCard bankCard)
 	{
 		int rowsAffected = 0;
 		try
 		{
-			prepStmt = dbConnection.prepareStatement(SEARCH_FOR_CLIENT);
+			prepStmt = dbConnection.prepareStatement(SEARCH_FOR_CLIENT_ACCOUNTS);
 			int clientID = bankCard.getClientid();
 			prepStmt.setInt(1, clientID);
 			rs = prepStmt.executeQuery();
 			while (rs.next())
 			{
-				int bClientID = rs.getInt(1);
+				int accountNUmber = rs.getInt(1);
 				String firstname = rs.getString(2);
 				String surname = rs.getString(3);
 				String email = rs.getString(4);
@@ -118,11 +82,4 @@ public class BankClientDAO_Impl implements BankClientDAO
 		
 	}
 
-	public static void main(String[] args)
-	{
-		BankClientDAO_Impl bcd = new BankClientDAO_Impl();
-		BankCard bankCard = new BankCard("4701", 1234);
-		BankClient bankClient = bcd.searchForBankClient(bankCard);
-		System.out.println(bankClient.toString());
-	}
 }
