@@ -57,6 +57,8 @@ public class CardReaderPanel extends JPanel
 	private JTextField messageJTF;
 	private JPanel basePanel;
 
+	private BankClient bankClient;
+
 	/**
 	 * Create the panel.
 	 */
@@ -298,8 +300,25 @@ public class CardReaderPanel extends JPanel
 			try
 			{
 				ATM_MainGUI.atmMachine.getAtmSession().getSocketOutput().writeObject(dto);
+				String messageFromServer = (String) ATM_MainGUI.atmMachine.getAtmSession().getSocketInput()
+						.readObject();
+				System.out.println("message from server = " + messageFromServer);
+				if (messageFromServer.equals("Card REJECTED...>>>"))
+				{
+					messageJTF.setText("Invalid Card or PIN number...>>>>>");
+					cardNumberJTF.setText("");
+					pinJTF.setText("");
+					cardNumberJTF.requestFocus();
+				}
+				BankClient bc = (BankClient) ATM_MainGUI.atmMachine.getAtmSession().getSocketInput().readObject();
+				System.out.println("bank client = " + bc);
 			}
 			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();

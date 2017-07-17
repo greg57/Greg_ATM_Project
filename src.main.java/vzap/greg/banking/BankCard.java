@@ -129,8 +129,8 @@ public class BankCard implements Serializable
 	@Override
 	public String toString()
 	{
-		return "BankCard [cardNumber=" + this.cardNumber + ", pinNumber=" + this.pinNumber + ", clientid="
-				+ this.clientid + ", isAdmin=" + this.isAdmin + ", isActive=" + this.isActive + "]";
+		return " BankCard [cardNumber=" + this.cardNumber + ", pinNumber=" + this.pinNumber + ", clientid="
+				+ this.clientid + ", isAdmin=" + this.isAdmin + ", isActive=" + this.isActive + "] ";
 	}
 	
 }
