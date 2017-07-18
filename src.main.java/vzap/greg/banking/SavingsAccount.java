@@ -64,8 +64,14 @@ public class SavingsAccount extends Account implements Serializable
 		{
 			throw new MoneyException("Account is disabled..>>>");
 		}
-		
-		
+		Money balance = this.getBalance();
+		Money result = Money.subtractMoney(balance, withDraw);
+		result = Money.subtractMoney(result, this.getBankCharges());
+		if(result.getRands() < 1000)
+		{
+			throw new MoneyException("Insufficient Funds");
+		}
+		this.setBalance(result);
 		return true;
 	}
 
@@ -95,28 +101,35 @@ public class SavingsAccount extends Account implements Serializable
 	}
 
 
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
 		SavingsAccount sa;
 		sa = new SavingsAccount(1, AccountType.SAVINGS_ACCOUNT, "2017-10-23", new Money(3200,99), "n", "y");
+		System.out.println("\n--------------Original Account Values-------------------------");
 		System.out.println(sa.toString());
 		try
 		{
 			sa.deposit(new Money(1000, 0));
+			System.out.println("\n--------------After Deposit-------------------------");
+			System.out.println(sa.toString());
 		}
 		catch (MoneyException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("\n---------------------------------------");
-		System.out.println(sa.toString());
 		
-		Money m1 = new Money(1000, 99);
-		Money m2  = new Money(1, 10);
-		System.out.println("m1 = " + m1.toString() + "  m2 = " + m2.toString());
-		Money result  = Money.subtractMoney(m1, m2);
-		System.out.println("result = " + result.toString());
+		try
+		{
+			sa.withDraw(new Money(8000, 44));
+			System.out.println("\n--------------After Withdrawel-------------------------");
+			System.out.println(sa.toString());
+		}
+		catch (MoneyException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
