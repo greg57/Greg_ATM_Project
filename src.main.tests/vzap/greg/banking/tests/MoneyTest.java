@@ -22,7 +22,7 @@ public class MoneyTest
 	@Test
 	public void testGetNotes()
 	{
-		assertTrue(m1.getNotes() == 100);
+		assertTrue(m1.getRands() == 100);
 	}
 
 	@Test
@@ -35,8 +35,8 @@ public class MoneyTest
 	public void testAddMoney()
 	{
 		Money addedMoney = Money.addMoney(m1, m2);
-		System.out.println("note = " + addedMoney.getNotes());
-		assertEquals(110, addedMoney.getNotes(), 0);
+		System.out.println("note = " + addedMoney.getRands());
+		assertEquals(110, addedMoney.getRands(), 0);
 		System.out.println("cents = " + addedMoney.getCents());
 		assertEquals(75, addedMoney.getCents(), 0);
 	}
@@ -45,7 +45,7 @@ public class MoneyTest
 	public void testSubtractMoney1()
 	{
 		Money subtractedMoney = Money.subtractMoney(m1, m2);
-		assertEquals(90, subtractedMoney.getNotes(), 0);
+		assertEquals(90, subtractedMoney.getRands(), 0);
 
 		assertEquals(25, subtractedMoney.getCents(), 0);
 	}
