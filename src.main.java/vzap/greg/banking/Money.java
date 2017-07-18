@@ -44,10 +44,6 @@ public final class Money implements Serializable
 			m1m2Notes = m1m2Notes - 1;
 			m1m2Cents = m1m2Cents + 100;
 		}
-		if(m1m2Notes < 0)
-		{
-			return null;
-		}
 		return new Money(m1m2Notes, m1m2Cents);
 	}
 	
