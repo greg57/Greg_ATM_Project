@@ -5,18 +5,18 @@ import java.io.Serializable;
 public final class Money implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private int notes;
+	private int rands;
 	private int cents;
 
 	public Money(int notes, int cents)
 	{
-		this.notes = notes;
+		this.rands = notes;
 		this.cents = cents;
 	}
 
-	public int getNotes()
+	public int getRands()
 	{
-		return notes;
+		return rands;
 	}
 
 	public int getCents()
@@ -26,7 +26,7 @@ public final class Money implements Serializable
 	public static Money addMoney(Money m1, Money m2)
 	{
 		int m1m2Cents = m1.getCents() + m2.getCents();
-		int m1m2Notes = m1.getNotes() + m2.getNotes();
+		int m1m2Notes = m1.getRands() + m2.getRands();
 		if(m1m2Cents > 99)
 		{
 			m1m2Notes = m1m2Notes + 1;
@@ -38,7 +38,7 @@ public final class Money implements Serializable
 	public static Money subtractMoney(Money m1, Money m2)
 	{
 		int m1m2Cents = m1.getCents() - m2.getCents();
-		int m1m2Notes = m1.getNotes() - m2.getNotes();
+		int m1m2Notes = m1.getRands() - m2.getRands();
 		if(m1m2Cents < 0)
 		{
 			m1m2Notes = m1m2Notes - 1;
@@ -57,7 +57,7 @@ public final class Money implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + cents;
-		result = prime * result + notes;
+		result = prime * result + rands;
 		return result;
 	}
 
@@ -81,7 +81,7 @@ public final class Money implements Serializable
 		{
 			return false;
 		}
-		if (notes != other.notes)
+		if (rands != other.rands)
 		{
 			return false;
 		}
@@ -91,7 +91,7 @@ public final class Money implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Money [notes=" + notes + ", cents=" + cents + "]";
+		return "Money [rands = " + rands + ", cents = " + cents + "]";
 	}
 
 }

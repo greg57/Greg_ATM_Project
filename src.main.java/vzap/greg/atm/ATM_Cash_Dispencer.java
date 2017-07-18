@@ -42,7 +42,7 @@ public class ATM_Cash_Dispencer implements Serializable
 	@SuppressWarnings("static-access")
 	public HashMap<MoneyDenominations, Integer> dispenceMoney(Money money) throws IllegalArgumentException, ATM_Cash_DispenserException
 	{
-		int notes = money.getNotes();
+		int notes = money.getRands();
 		if((money.getCents() > 0)|| (notes % 10 > 0) || (notes <= 0))
 		{
 			throw new IllegalArgumentException("The ATM only works in 200, 100, 50 20 and 10 notes..");
