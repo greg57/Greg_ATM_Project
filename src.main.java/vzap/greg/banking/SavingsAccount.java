@@ -6,13 +6,10 @@ import java.util.Date;
 public class SavingsAccount extends Account implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private double interestRateOnSavings = 6.6;
+	private double minimumBalance = 0.0;
+	private double interestRateOnSavings = 0.0;
 	
-	public SavingsAccount(BankCard bankCard, Date dateCreated, Money bankCharges, Money balance)
-	{
-		super(bankCard, dateCreated, bankCharges, balance);
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	public double getInterestRateOnSavings()
 	{

@@ -18,8 +18,6 @@ public class BankClientAccountDAO
 	private Connection dbConnection = null;
 	private PreparedStatement prepStmt = null;
 	private ResultSet rs = null;
-	private BankCard bankCard = null;
-	private BankClient bankClient = null;
 	private ArrayList<Account> bankAcounts;
 	
 	public static final String SEARCH_FOR_CLIENT_ACCOUNTS = "select * from accounttable where clientID = ?";
@@ -54,16 +52,18 @@ public class BankClientAccountDAO
 			while (rs.next())
 			{
 				int accountNUmber = rs.getInt(1);
-				String firstname = rs.getString(2);
-				String surname = rs.getString(3);
-				String email = rs.getString(4);
-				String cellnumber = rs.getString(5);
-				String isActive = rs.getString(6);
-				bankClient = new BankClient(bClientID, firstname, surname, email, cellnumber, isActive,bankCard);
-				//return bClient;
+				String accountType = rs.getString(2);
+				int clientid = rs.getInt(3);
+				double balance = rs.getDouble(4);
+				String dateCreated = rs.getString(5);
+				double minimumBalance = rs.getDouble(6);
+				String isFrozen = rs.getString(7);
+				String isActive = rs.getString(8);
+				
+				//Account account = new 
 			}
 			//System.out.println("in BanlClientDAO card = " + bankCard.getCardNumber());
-			return bankClient;
+			return null;
 		}
 		catch (SQLException e)
 		{
