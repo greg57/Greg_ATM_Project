@@ -2,14 +2,17 @@ package vzap.greg.dto;
 
 import java.io.Serializable;
 import java.util.Properties;
+import java.util.Vector;
 
 import vzap.greg.atm.ATM_Machine;
 import vzap.greg.banking.BankClient;
+import vzap.greg.banking.Account;
 
 public class ATM_ServerDTO implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private BankClient bankClient = null;
+	private Vector<Account> accounts = null;
 	private String messageToServer = null;
 	private String messageFromServer = null;
 	private Properties atmProperties = null;

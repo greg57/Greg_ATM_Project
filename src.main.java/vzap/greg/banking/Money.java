@@ -8,10 +8,17 @@ public final class Money implements Serializable
 	private int rands;
 	private int cents;
 
-	public Money(int notes, int cents)
+	public Money(int rands, int cents)
 	{
-		this.rands = notes;
+		this.rands = rands;
 		this.cents = cents;
+	}
+	public Money(double currency)
+	{
+		int r = (int)currency;
+		int c = (int)((currency - r) * 100);
+		this.rands = r;
+		this.cents = c;
 	}
 
 	public int getRands()
