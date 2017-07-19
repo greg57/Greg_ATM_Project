@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
 
+import vzap.greg.banking.Account;
 import vzap.greg.banking.BankCard;
 import vzap.greg.banking.BankClient;
 import vzap.greg.dto.ATM_ServerDTO;
@@ -29,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Vector;
 
 public class CardReaderPanel extends JPanel
 {
@@ -57,7 +59,8 @@ public class CardReaderPanel extends JPanel
 	private JTextField messageJTF;
 	private JPanel basePanel;
 
-	private BankClient bankClient;
+	private BankClient bankClient = null;
+	private Vector<Account> accounts = null;
 
 	/**
 	 * Create the panel.
@@ -296,7 +299,7 @@ public class CardReaderPanel extends JPanel
 			BankClient bankClient = new BankClient(bankCard);
 			String messageToServer = "validate card";
 			ATM_ServerDTO dto = new ATM_ServerDTO(bankClient, messageToServer, null,
-					ATM_MainGUI.atmMachine.getAtmProperties());
+					ATM_MainGUI.atmMachine.getAtmProperties(), accounts);
 			try
 			{
 				ATM_MainGUI.atmMachine.getAtmSession().getSocketOutput().writeObject(dto);

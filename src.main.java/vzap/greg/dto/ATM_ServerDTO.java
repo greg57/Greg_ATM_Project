@@ -17,18 +17,24 @@ public class ATM_ServerDTO implements Serializable
 	private String messageFromServer = null;
 	private Properties atmProperties = null;
 	
-	public ATM_ServerDTO(BankClient bankClient, String messageToServer, String messageFromServer, Properties atmProperties)
+	public ATM_ServerDTO(BankClient bankClient, String messageToServer, String messageFromServer, Properties atmProperties, Vector<Account> accounts)
 	{
 		super();
 		this.bankClient = bankClient;
 		this.messageToServer = messageToServer;
 		this.messageFromServer = messageFromServer;
 		this.atmProperties = atmProperties;
+		this.accounts = accounts;
 	}
 
 	public static long getSerialversionuid()
 	{
 		return serialVersionUID;
+	}
+
+	public Vector<Account> getAccounts()
+	{
+		return this.accounts;
 	}
 
 	public BankClient getBankClient()
@@ -54,10 +60,11 @@ public class ATM_ServerDTO implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ATM_ServerDTO [bankClient=" + this.bankClient + ", messageToServer=" + this.messageToServer
-				+ ", messageFromServer=" + this.messageFromServer + ", atmProperties=" + this.atmProperties + "]";
+		return "ATM_ServerDTO [bankClient=" + this.bankClient + ", accounts=" + this.accounts + 
+				", messageToServer=" + this.messageToServer + 
+				", messageFromServer=" + this.messageFromServer + 
+				", atmProperties=" 	+ this.atmProperties + "]";
 	}
-	
-	
+
 	
 }
