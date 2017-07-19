@@ -47,7 +47,7 @@ public class ATM_MainGUI extends JFrame
 		atmMachine = new ATM_Machine();
 		System.out.println("atm machine constructed...>>>>");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1134, 894);
+		setBounds(100, 100, 1234, 894);
 		basePanel = new JPanel(new GridLayout(1, 1));
 		basePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		cardReaderPanel = new CardReaderPanel(basePanel);

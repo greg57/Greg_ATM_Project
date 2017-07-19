@@ -19,7 +19,7 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 	private PreparedStatement prepStmt = null;
 	private ResultSet rs = null;
 	
-	public static final String SEARCH_FOR_BANK_CARD = "select * from cardtable where cardNumber = ?";
+	public static final String SEARCH_FOR_BANK_CARD = "select * from cardtable where cardNumber = ? and pinNumber = ?";
 	
 	public BankCardMySQL_DAO_Impl()
 	{
@@ -43,7 +43,9 @@ public class BankCardMySQL_DAO_Impl implements BankCardDAO
 		{
 			prepStmt = dbConnection.prepareStatement(SEARCH_FOR_BANK_CARD);
 			String cardNo = bankCard.getCardNumber();
+			int pin = bankCard.getPinNumber();
 			prepStmt.setString(1, cardNo);
+			prepStmt.setInt(2, pin);
 			rs = prepStmt.executeQuery();
 			while(rs.next())
 			{

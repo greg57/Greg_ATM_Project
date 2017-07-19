@@ -286,7 +286,7 @@ public class CardReaderPanel extends JPanel
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if ((cardNumberJTF.getText().equals("")) || (pinJTF.getText().equals("")))
+			if ((cardNumberJTF.getText().equals("")) || ((new String(pinJTF.getPassword())).equals("")))
 			{
 				messageJTF.setText("You must fill in your card and PIN numbers");
 				cardNumberJTF.setText("");
@@ -312,9 +312,16 @@ public class CardReaderPanel extends JPanel
 					cardNumberJTF.setText("");
 					pinJTF.setText("");
 					cardNumberJTF.requestFocus();
+					return;
 				}
 				BankClient bc = (BankClient) ATM_MainGUI.atmMachine.getAtmSession().getSocketInput().readObject();
 				System.out.println("bank client = " + bc);
+				basePanel.removeAll();
+				basePanel.validate();
+				basePanel.repaint();
+				basePanel.add(new ATM_Panel(basePanel));
+				basePanel.validate();
+				basePanel.repaint();
 			}
 			catch (IOException e)
 			{
