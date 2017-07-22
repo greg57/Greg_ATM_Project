@@ -119,15 +119,15 @@ public class CardReaderPanel extends JPanel
 						.addGroup(
 								groupLayout.createSequentialGroup().addGap(325).addComponent(lblVzapBank,
 										GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(75).addGroup(groupLayout
-								.createParallelGroup(Alignment.LEADING).addComponent(cardNumberPanel,
-										GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 387,
+						.addGroup(groupLayout.createSequentialGroup().addGap(75)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(cardNumberPanel, GroupLayout.PREFERRED_SIZE, 357,
 												GroupLayout.PREFERRED_SIZE)
-										.addGap(54).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 488,
-												GroupLayout.PREFERRED_SIZE)))))
-				.addContainerGap(40, Short.MAX_VALUE))
+										.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(keyPanel, GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+												.addGap(54).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE,
+														488, Short.MAX_VALUE)))))
+				.addGap(40))
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(560, Short.MAX_VALUE)
 						.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 357, GroupLayout.PREFERRED_SIZE)
 						.addGap(127))
@@ -139,17 +139,15 @@ public class CardReaderPanel extends JPanel
 				.addComponent(mesagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 						GroupLayout.PREFERRED_SIZE)
 				.addGap(38)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-								.addGap(61).addComponent(cardReaderPanel, GroupLayout.PREFERRED_SIZE, 298,
-										GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+						.createSequentialGroup()
+						.addComponent(pinPanel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE).addGap(61)
+						.addComponent(cardReaderPanel, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE).addGap(62))
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(cardNumberPanel, GroupLayout.PREFERRED_SIZE, 83,
 										GroupLayout.PREFERRED_SIZE)
-								.addGap(47)
-								.addComponent(keyPanel, GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(41, Short.MAX_VALUE)));
+								.addGap(47).addComponent(keyPanel, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)))
+				.addGap(42)));
 		mesagePanel.setLayout(new GridLayout(1, 1, 0, 0));
 
 		messageJTF = new JTextField();
@@ -242,8 +240,7 @@ public class CardReaderPanel extends JPanel
 				new LineBorder(new Color(0, 255, 0))));
 		lblCardreadericon.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCardreadericon.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblCardreadericon.setIcon(new ImageIcon(
-				"C:\\Users\\greg\\java\\projects\\neonProjects\\ATM_ProjectGregVersionServer\\resources\\scaledCardReader.png"));
+		lblCardreadericon.setIcon(new ImageIcon("resources/scaledCardReader.png"));
 
 		lblInsertCard = new JLabel("Insert Card");
 		lblInsertCard.setForeground(new Color(0, 0, 255));

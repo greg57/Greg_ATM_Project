@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.io.*;
 //import java.net.Socket;
+import java.net.URL;
 
 import vzap.greg.session.ATM_Session;
 
@@ -38,7 +39,9 @@ public class ATM_Machine implements Serializable
 		atmProperties = new Properties();
 		try
 		{
+			//InputStream input = ATM_Machine.class.getResourceAsStream("../resources/atm.properties");
 			atmPropertiesInput = new FileInputStream("resources/atm.properties");
+			//InputStream is = ATM_Machine.class.getResourceAsStream("./resources/atm.properties");
 			atmProperties.load(atmPropertiesInput);
 			atmID = atmProperties.getProperty("atmID");
 			atmLocation = atmProperties.getProperty("atmLocation");
