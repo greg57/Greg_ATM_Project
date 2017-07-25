@@ -39,10 +39,22 @@ public class ATM_Machine implements Serializable
 		atmProperties = new Properties();
 		try
 		{
-			//InputStream input = ATM_Machine.class.getResourceAsStream("../resources/atm.properties");
-			atmPropertiesInput = new FileInputStream("resources/atm.properties");
-			//InputStream is = ATM_Machine.class.getResourceAsStream("./resources/atm.properties");
-			atmProperties.load(atmPropertiesInput);
+			InputStream input = ClassLoader.getSystemClassLoader().getResourceAsStream("resources/atm.properties");
+			if(input == null)
+			{
+				atmPropertiesInput = new FileInputStream("./resources/atm.properties");
+				atmProperties.load(atmPropertiesInput);
+				atmPropertiesInput.close();
+				//input.close();
+			}
+			else
+			{
+				atmProperties.load(input);//atmPropertiesInput);
+				input.close();
+			}
+			
+			
+		
 			atmID = atmProperties.getProperty("atmID");
 			atmLocation = atmProperties.getProperty("atmLocation");
 			atmSerialNumber = atmProperties.getProperty("atmSerialNumber");
@@ -62,8 +74,8 @@ public class ATM_Machine implements Serializable
 			System.out.println("Date in Service = " + dateInService.toString());
 			System.out.println("active? " + active);
 			
-			atmPropertiesInput.close();
-			
+			//atmPropertiesInput.close();
+			//input.close();
 			atmSession = new ATM_Session(serverIP_Address, serverPortNumber);
 
 			cardReader = new ATM_Card_Reader();

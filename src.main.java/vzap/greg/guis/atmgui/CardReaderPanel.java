@@ -3,6 +3,8 @@ package vzap.greg.guis.atmgui;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -14,6 +16,8 @@ import java.awt.Component;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
@@ -29,7 +33,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Vector;
 
 public class CardReaderPanel extends JPanel
@@ -240,7 +247,26 @@ public class CardReaderPanel extends JPanel
 				new LineBorder(new Color(0, 255, 0))));
 		lblCardreadericon.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCardreadericon.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblCardreadericon.setIcon(new ImageIcon("resources/scaledCardReader.png"));
+		URL url = ClassLoader.getSystemClassLoader().getResource("resources/scaledCardReader.png");
+		if (url == null)
+		{
+			lblCardreadericon.setIcon(new ImageIcon("resources/scaledCardReader.png"));
+		}
+		else
+		{
+
+			try
+			{
+				ImageIcon icon = new ImageIcon(url);
+				lblCardreadericon.setIcon(icon);
+
+			}
+			catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		lblInsertCard = new JLabel("Insert Card");
 		lblInsertCard.setForeground(new Color(0, 0, 255));
