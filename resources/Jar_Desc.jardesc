@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="C:/Users/greg/temp/ATM_Server.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/ATM_ProjectGregVersionServer/resources/Jar_Desc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" mainClassHandleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.server{VZAP_BankServer.java[VZAP_BankServer" manifestLocation="/ATM_ProjectGregVersionServer/resources/ManifestFile" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="true">
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.banking"/>
+        <file path="/ATM_ProjectGregVersionServer/.project"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.enums"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.session"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.transaction"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.dao"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.connection"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.server"/>
+        <folder path="/ATM_ProjectGregVersionServer/resources"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.dto"/>
+        <javaElement handleIdentifier="=ATM_ProjectGregVersionServer/src.main.java&lt;vzap.greg.exception"/>
+        <file path="/ATM_ProjectGregVersionServer/.classpath"/>
+    </selectedElements>
+</jardesc>

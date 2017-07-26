@@ -22,13 +22,23 @@ public class VZAP_BankServer
 	public VZAP_BankServer()
 	{
 		Properties serverProperties = new Properties();
+		InputStream input = ClassLoader.getSystemClassLoader().getResourceAsStream("resources/atmServer.properties");
 		try
 		{
-			FileInputStream in = new FileInputStream("resources/atmServer.properties");
-			serverProperties.load(in);
-			in.close();
-			listeningPort = Integer.parseInt(serverProperties.getProperty("serverPortNumber"));
-			System.out.println("Server's Listening port = " + listeningPort);
+			if (input == null)
+			{
+				FileInputStream in = new FileInputStream("resources/atmServer.properties");
+				serverProperties.load(in);
+				in.close();
+				listeningPort = Integer.parseInt(serverProperties.getProperty("serverPortNumber"));
+				System.out.println("Server's Listening port = " + listeningPort);
+			}
+			else
+			{
+				serverProperties.load(input);
+				listeningPort = Integer.parseInt(serverProperties.getProperty("serverPortNumber"));
+				input.close();
+			}
 		}
 		catch (FileNotFoundException e1)
 		{
@@ -108,7 +118,7 @@ public class VZAP_BankServer
 					dto = (ATM_ServerDTO) inputFromClient.readObject();
 					messageFromClient = dto.getMessageToServer();
 					System.out.println("<<<<...Message From Client...>>>> : " + messageFromClient);
-					if(messageFromClient.equals("end"))
+					if (messageFromClient.equals("end"))
 					{
 						break;
 					}
