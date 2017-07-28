@@ -47,7 +47,7 @@ public class MySQL_Connection
 		url = "jdbc:mysql://" + this.ipAddress + ":" + this.portNumber + "/" + this.databaseName;
 		System.out.println("url = " + url);
 
-		Class.forName("/com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver");
 
 		connection = DriverManager.getConnection("jdbc:mysql://" + ipAddress + ":3306/" + databaseName, username,
 				password);
